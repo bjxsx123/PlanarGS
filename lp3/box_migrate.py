@@ -83,9 +83,9 @@ def ProjectPlane(mask_src, depth_src, cam_info_src, cam_info_tgt):
     
     # transfer points from src to tgt
     R_src = torch.inverse(torch.from_numpy(cam_info_src.R).float().to(device))
-    t_src = -R_src @ torch.from_numpy(cam_info_src.T).float().to(device).view(3, 1)
+    t_src = torch.from_numpy(cam_info_src.T).float().to(device).view(3, 1)
     R_tgt = torch.inverse(torch.from_numpy(cam_info_tgt.R).float().to(device))
-    t_tgt = -R_tgt @ torch.from_numpy(cam_info_tgt.T).float().to(device).view(3, 1)
+    t_tgt = torch.from_numpy(cam_info_tgt.T).float().to(device).view(3, 1)
     R_rel = R_tgt @ torch.inverse(R_src)
     t_rel = t_tgt - R_tgt @ R_src.T @ t_src
     points_3d_tgt = points_src @ R_rel.T + t_rel.T  # (N, 3)
@@ -94,5 +94,4 @@ def ProjectPlane(mask_src, depth_src, cam_info_src, cam_info_tgt):
     mask_tgt, _  = Pointscam2Depth(K_tgt, points_3d_tgt.T, (H, W))
 
     return mask_tgt
-
 
