@@ -1,7 +1,9 @@
 *.pyc
 .vscode
-build
+.idea
+dataset
 output
-*.pth
+build
+checkpoint
 submodules/groundedsam
 ckpt

@@ -1,16 +1,11 @@
+import cv2
 import torch
 from PIL import Image
-import cv2
-import sys
-import os
-sys.path.append(os.path.join(os.getcwd(), "submodules/groundedsam/GroundingDINO"))
-sys.path.append(os.path.join(os.getcwd(), "submodules/groundedsam/segment_anything"))
 
-# Grounding DINO
-import submodules.groundedsam.GroundingDINO.groundingdino.datasets.transforms as T
-from submodules.groundedsam.GroundingDINO.groundingdino.models import build_model
-from submodules.groundedsam.GroundingDINO.groundingdino.util.slconfig import SLConfig
-from submodules.groundedsam.GroundingDINO.groundingdino.util.utils import clean_state_dict, get_phrases_from_posmap
+from groundingdino.datasets import transforms as T
+from groundingdino.models import build_model
+from groundingdino.util.slconfig import SLConfig
+from groundingdino.util.utils import clean_state_dict, get_phrases_from_posmap
 
 # segment anything
 from submodules.groundedsam.segment_anything.segment_anything import (
